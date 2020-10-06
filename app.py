@@ -6,8 +6,8 @@ from flask import Flask
 app = Flask(__name__)
 
 
-
-
+## see: app w/ querying notes
+##
 
 @app.route("/")
 def home():
