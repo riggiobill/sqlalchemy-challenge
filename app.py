@@ -1,7 +1,14 @@
 ## imported skeletal text from older code
+import numpy as np
+import pandas as pd 
+import datetime as dt
 
+import sqlalchemy
+from sqlalchemy.ext.automap import automap_base
+from sqlalchemy.orm import Session
+from sqlalchemy import create_engine, func, inspect
 
-from flask import Flask
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 
@@ -14,6 +21,16 @@ app = Flask(__name__)
 ##save tables as classes
 
 ##create info variables for Measurement and Station to use below
+
+engine = create_engine("sqlite:///Resources/hawaii.sqlite")
+Base = automap_base()
+Base.prepare(engine, reflect=True)
+Base.classes.keys()
+Station = Base.classes.station
+Measurement = Base.classes.measurement
+
+session = Session(bind=engine)
+
 
 
 
@@ -58,12 +75,12 @@ def contact():
     return "" + email
 
 @app.route("/<start>")
-def contact():
+def start():
     
     return ""
 
 @app.route("/<start>/<end>")
-def contact():
+def startend():
     
     return ""
 
