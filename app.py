@@ -29,7 +29,6 @@ Base.classes.keys()
 Station = Base.classes.station
 Measurement = Base.classes.measurement
 
-session = Session(bind=engine)
 
 
 
@@ -41,11 +40,11 @@ def home():
     return (
         f"Welcome to SQLAlchemy Challenge API!<br/>"
         f"Available Routes:<br/>"
-        f" '/' : home<br/>"
-        f" '/precipitation' : returns DICT of query results as Date:Prcp<br/>"
-        f" '/stations' : returns JSON list of stations<br/>"
-        f" '/<start>' : returns JSON list of temp observation after a certain date<br/>"
-        f" '/<start>/<end>' : returns JSON list of temp observation between two dates<br/>"
+        f" '/' :                home<br/>"
+        f" '/precipitation' :   returns DICT of query results as Date:Prcp<br/>"
+        f" '/stations' :        returns JSON list of stations<br/>"
+        f" '/start' :           returns JSON list of temp observation after a certain date<br/>"
+        f" '/start/end' :       returns JSON list of temp observation between two dates<br/>"
         f""
     )
 
@@ -56,23 +55,41 @@ def home():
 ##pull from that and it'll be done in no time.
 
 @app.route("/precipitation")
-def about():
+def precipitation():
+    """Return a dictionary including Date and Precipitation in a JSON DICT format"""
+    session = Session(engine)
+   
+    # Query all date/precipitation info
+    results = session.query(Measurement.date, Measurement.prcp).all()
+    session.close()
 
-    ##query for precipitation for last 12 months
-    ##as per other file
-    ##instantiated as a DICT
-    ##jsonify?
+    # Create a dictionary from the row data and append to a list of all_prcp
+    all_prcp = []
+    for date, prcp in results:
+        prcp_dict = {}
+        prcp_dict["date"] = date
+        prcp_dict["prcp"] = prcp
+        all_prcp.append(prcp_dict)
 
-
-
-    name = ""
-    current_location = ""
-    return f"{name} {current_location}"
+    return jsonify(all_prcp)
 
 @app.route("/stations")
-def contact():
-    email = ""
-    return "" + email
+def stations():
+    """Return a JSON list of all stations from the dataset"""
+    session = Session(engine)
+   
+    # Query all date/precipitation info
+    results = session.query(Station.name).all()
+    session.close()
+
+    # Create a dictionary from the row data and append to a list of all_prcp
+    all_station = []
+    for station in results:
+        station_dict = {}
+        station_dict["station"] = station
+        all_station.append(station_dict)
+
+    return jsonify(all_station)
 
 @app.route("/<start>")
 def start():
