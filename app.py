@@ -45,7 +45,9 @@ def home():
         f" '/stations' :        returns JSON list of stations<br/>"
         f" '/tobs' :            returns JSON DICT of TOBS for most active station for previous year<br/>"
         f" '/start' :           returns JSON list of temp observation after a certain date<br/>"
+        f"                      *takes format of YYYY-MM-DD<br/>"
         f" '/start/end' :       returns JSON list of temp observation between two dates<br/>"
+        f"                      *takes format of YYYY-MM-DD<br/>"
         f""
     )
 
