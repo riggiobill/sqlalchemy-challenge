@@ -1,6 +1,5 @@
 ## imported skeletal text from older code
-import numpy as np
-import pandas as pd 
+
 import datetime as dt
 
 import sqlalchemy
@@ -44,9 +43,9 @@ def home():
         f" '/precipitation' :   returns DICT of query results as Date:Prcp<br/>"
         f" '/stations' :        returns JSON list of stations<br/>"
         f" '/tobs' :            returns JSON DICT of TOBS for most active station for previous year<br/>"
-        f" '/start' :           returns JSON list of temp observation after a certain date<br/>"
+        f" '/start' :           returns JSON list of temp observation summary stats after a certain date<br/>"
         f"                      *takes format of YYYY-MM-DD<br/>"
-        f" '/start/end' :       returns JSON list of temp observation between two dates<br/>"
+        f" '/start/end' :       returns JSON list of temp observation summary stats between two dates<br/>"
         f"                      *takes format of YYYY-MM-DD<br/>"
         f""
     )
